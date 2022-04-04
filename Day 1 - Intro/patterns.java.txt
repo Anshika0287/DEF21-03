@@ -1,0 +1,146 @@
+import java.util.*;
+
+public class HelloWorld{
+    
+    //pattern one 
+    
+    static void one(int n){
+        for(int i=0; i<n;i++){
+             for(int j=0; j<i+1; j++){
+                 System.out.print("*"+" ");
+             }
+             System.out.println();
+         }
+    }
+    
+    //pattern two
+    
+     static void two(int n){
+        for(int i=0; i<n;i++){
+             for(int j=0; j<n-i; j++){
+                 System.out.print("*"+" ");
+             }
+             System.out.println();
+         }
+    }
+    
+    //pattern three
+    
+    static void three(int n){
+        for(int i=0; i<n;i++){
+             for(int j=0; j<i+1; j++){
+                 System.out.print("*"+" ");
+             }
+             System.out.println();
+         }
+         for(int i=0; i<n;i++){
+             for(int j=0; j<n-i-1; j++){
+                 System.out.print("*"+" ");
+             }
+             System.out.println();
+         }
+         
+    }
+    
+    //pattern four
+    
+    static void four(int n){
+        for(int i=0; i<n;i++){
+             for(int j=0; j<n; j++){
+                 
+                 if(j<n-i-1){
+                 System.out.print(" "+" ");
+             }
+             else{
+                 System.out.print("*"+" ");
+             
+             
+             }
+             }
+             System.out.println();
+         }
+    }
+    
+    //pattern five
+    
+    static void five(int n){
+        int k=0;
+        for (int i = 1; i <= n; ++i, k = 0) {
+      for (int j = 1; j <= n - i; ++j) {
+        System.out.print("  ");
+      }
+
+      while (k != 2 * i - 1) {
+        System.out.print("* ");
+        ++k;
+      }
+
+      System.out.println();
+    }
+           
+        }
+        
+        //pattern six
+        
+        
+         static void six(int n){
+        for(int i=1; i<=n;i++){
+             for(int j=1; j<=i; j++){
+                 System.out.print(j+" ");
+             }
+             System.out.println();
+         }
+    }
+        
+    //pattern seven
+    
+    static void seven(int n){
+         int k=0;
+        for(int i=1; i<=n;i++){
+           
+             for(int j=1; j<=i; j++){
+                
+                 System.out.print(k+" ");
+             }
+             System.out.println();
+         }
+    }
+    
+    
+
+     public static void main(String []args){
+         
+         Scanner sc= new Scanner(System.in);
+         int n= sc.nextInt();
+         
+         one(n);
+         System.out.println();
+          System.out.println();
+          
+          
+         two(n);
+         System.out.println();
+          System.out.println();
+          
+          
+          three(n);
+         System.out.println();
+          System.out.println();
+          
+          four(n);
+         System.out.println();
+          System.out.println();
+          
+          five(n);
+          System.out.println();
+          System.out.println();
+          
+          six(n);
+          System.out.println();
+          System.out.println();
+          
+           seven(n);
+          System.out.println();
+          System.out.println();
+     }
+}
