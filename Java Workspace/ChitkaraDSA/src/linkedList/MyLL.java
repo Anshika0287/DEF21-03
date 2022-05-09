@@ -66,6 +66,27 @@ public class MyLL {
 		System.out.println("Middle Element: " + slow.data);
 	}
 
+//	https://practice.geeksforgeeks.org/problems/merge-k-sorted-linked-lists/1/
+	//Function to merge K sorted linked list.
+    Node mergeKList(Node[]arr,int K)
+    {
+        int l = 0;
+        int r = K-1;
+        
+
+        while(l<r)
+        {
+            arr[l] = sortedMerge(arr[l], arr[r]);
+            l++;
+            r--;
+            if(l>=r)
+            {
+                l = 0;
+            }
+        }
+        return arr[0];
+    }
+	
 //	https://practice.geeksforgeeks.org/problems/merge-two-sorted-linked-lists/1#
 	static Node sortedMerge(Node head1, Node head2) {
 		// This is a "method-only" submission.
@@ -127,6 +148,171 @@ public class MyLL {
 		}
 
 		return prev;
+	}
+
+//	https://practice.geeksforgeeks.org/problems/intersection-point-in-y-shapped-linked-lists/1
+	static int intersectPoint(Node head1, Node head2) {
+		Node temp1 = head1;
+		Node temp2 = head2;
+
+		while (temp1 != null) {
+			while (temp2 != null) {
+				if (temp1 == temp2) {
+					return temp1.data;
+				}
+				temp2 = temp2.next;
+			}
+			temp2 = head2;
+			temp1 = temp1.next;
+		}
+		return -1;
+	}
+
+//	https://practice.geeksforgeeks.org/problems/intersection-point-in-y-shapped-linked-lists/1
+	static int intersectPointOptimized(Node head1, Node head2) {
+		Node temp1 = head1;
+		Node temp2 = head2;
+
+		int len1 = 0;
+		int len2 = 0;
+		int diff = 0;
+
+		while (temp1 != null) {
+			temp1 = temp1.next;
+			len1++;
+		}
+
+		while (temp2 != null) {
+			temp2 = temp2.next;
+			len2++;
+		}
+		// Calculated length of both lists
+		if (len1 >= len2) {
+			temp1 = head1; // Call the longer as list1
+			temp2 = head2; // Call the shorter as list2
+			diff = len1 - len2;
+		} else {
+			temp1 = head2;// Call the longer as list1
+			temp2 = head1;// Call the shorted as list2
+			diff = len2 - len1;
+		}
+
+		// Move the longer one ahead
+		for (int i = 0; i < diff; i++) {
+			temp1 = temp1.next;
+		}
+
+		// Move together and compare
+		while (temp1 != null && temp2 != null) {
+			if (temp1 == temp2)
+				return temp1.data;
+			temp1 = temp1.next;
+			temp2 = temp2.next;
+		}
+
+		// Reaching here means intersection point not found.
+		return -1;
+	}
+
+	// Only for reference -> Approach - 2
+	static void removeLoop(Node Node, Node loopNode) {
+		Node temp = loopNode;
+		int size = 1;
+		while (loopNode.next != temp)// finding size of loop
+		{
+			loopNode = loopNode.next;
+			size++;
+		}
+
+		Node slow = Node; // Node is head
+		Node fast = Node;
+
+		for (int i = 0; i < size; i++) {
+			fast = fast.next;
+		}
+
+		// Move them together
+		while (slow.next != fast.next) {
+			slow = slow.next;
+			fast = fast.next;
+		}
+		fast.next = null;
+
+	}
+
+//	https://practice.geeksforgeeks.org/problems/remove-loop-in-linked-list/1#
+	// Function to remove a loop in the linked list.
+	public static void removeLoop(Node head) {
+		if (head == null)
+			return;
+
+		Node slow = head;
+		Node fast = head;
+
+		while (fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+
+			if (slow == fast) {
+				removeLoopUtil(head, fast);
+				return;
+			}
+		}
+
+		// Loop not found
+		return;
+	}
+
+	static void removeLoopUtil(Node head, Node fast) {
+		Node slow = head;
+
+		if (slow == fast) // Explicit handling for Circular Linked List
+		{
+			while (fast.next != slow) {
+				fast = fast.next;
+			}
+
+			fast.next = null;
+			return;
+		}
+
+		while (slow.next != fast.next) {
+			slow = slow.next;
+			fast = fast.next;
+		}
+
+		fast.next = null;
+	}
+
+//	https://leetcode.com/problems/add-two-numbers/
+	public Node addTwoNumbers(Node l1, Node l2) {
+		Node result = null;
+		Node curr = result;
+		int carry = 0;
+
+		while (!(l1 == null && l2 == null)) {
+			int a = (l1 == null) ? 0 : l1.data;
+			int b = (l2 == null) ? 0 : l2.data;
+			int sum = carry + a + b;
+			carry = sum / 10;
+			if (result == null) {
+				result = new Node(sum % 10);
+				curr = result;
+			} else {
+				curr.next = new Node(sum % 10);
+				curr = curr.next;
+			}
+			if (l1 != null)
+				l1 = l1.next;
+			if (l2 != null)
+				l2 = l2.next;
+
+		}
+		if (carry != 0) {
+			curr.next = new Node(carry);
+		}
+
+		return result;
 	}
 
 	public static void main(String[] args) {
